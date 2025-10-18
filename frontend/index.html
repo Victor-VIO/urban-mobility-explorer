@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC Taxi Data Explorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+    <header>
+        <h1>🚕 NYC Taxi Data Explorer</h1>
+        <p class="subtitle">Exploring Urban Mobility Patterns in New York City</p>
+        </header>
+
+    <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+        <div class="stat-label">Total Trips</div>
+        <div class="stat-value" id="totalTrips">-</div>
+        </div>
+        <div class="stat-card">
+        <div class="stat-label">Avg Duration</div>
+        <div class="stat-value" id="avgDuration">-<span class="stat-unit">min</span></div>
+        </div>
+        <div class="stat-card">
+        <div class="stat-label">Avg Distance</div>
+        <div class="stat-value" id="avgDistance">-<span class="stat-unit">mi</span></div>
+        </div>
+        <div class="stat-card">
+        <div class="stat-label">Avg Speed</div>
+        <div class="stat-value" id="avgSpeed">-<span class="stat-unit">mph</span></div>
+        </div>
+    </div>
+
+    <div class="filters-section">
+        <div class="filters-title">Filter Trips</div>
+        <div class="filters-grid">
+        <div class="filter-group">
+                <label for="timeOfDay">Time of Day</label>
+            <select id="timeOfDay">
+            <option value="">All Times</option>
+            <option value="morning">Morning (6AM-12PM)</option>
+            <option value="afternoon">Afternoon (12PM-5PM)</option>
+            <option value="evening">Evening (5PM-9PM)</option>
+            <option value="night">Night (9PM-6AM)</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="speedCategory">Speed Category</label>
+            <select id="speedCategory">
+            <option value="">All Speeds</option>
+            <option value="very_slow">Very Slow (&lt;5 mph)</option>
+            <option value="slow">Slow (5-15 mph)</option>
+            <option value="moderate">Moderate (15-25 mph)</option>
+            <option value="fast">Fast (25-40 mph)</option>
+            <option value="very_fast">Very Fast (&gt;40 mph)</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="minDistance">Min Distance (miles)</label>
+            <input type="number" id="minDistance" min="0" step="0.1" placeholder="0.0">
+        </div>
+        <div class="filter-group">
+            <label for="maxDistance">Max Distance (miles)</label>
+            <input type="number" id="maxDistance" min="0" step="0.1" placeholder="Any">
+        </div>
+        </div>
+        <div>
+        <button class="btn" id="applyBtn" onclick="applyFilters()">Apply Filters</button>
+        <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+        </div>
+    </div>
+
+    <div class="charts-section">
+        <div class="chart-card">
+        <div class="chart-title">📊 Trips by Time of Day</div>
+        <div class="chart-container" id="timeChart">
+            <div class="loading">Loading</div>
+        </div>
+        </div>
+        <div class="chart-card">
+        <div class="chart-title">🚗 Speed Distribution</div>
+        <div class="chart-container" id="speedChart">
+            <div class="loading">Loading</div>
+        </div>
+        </div>
+    </div>
+
+    <div class="trips-table-section">
+        <div class="table-header">
+        <div class="table-title">🗂️ Recent Trips</div>
+        <div class="pagination">
+            <button class="btn" id="prevBtn" onclick="previousPage()">← Previous</button>
+            <span>Page <span id="currentPage">1</span></span>
+            <button class="btn" id="nextBtn" onclick="nextPage()">Next →</button>
+        </div>
+        </div>
+        <div id="tableContainer">
+        <div class="loading">Loading trips data</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>NYC Taxi Data Explorer | Built with FastAPI & Vanilla JavaScript</p>
+        <p>Data Source: NYC Taxi Trip Dataset (2016)</p>
+    </footer>
+    </div>
+</body>
+</html>
